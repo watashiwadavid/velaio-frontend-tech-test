@@ -5,6 +5,7 @@ module.exports = {
     "./src/**/*.scss",
     "./@velaio/**/*.{html,ts}",
     "./@velaio/**/*.scss",
+    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
     extend: {
@@ -21,5 +22,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms"), require("flowbite/plugin")],
 };
