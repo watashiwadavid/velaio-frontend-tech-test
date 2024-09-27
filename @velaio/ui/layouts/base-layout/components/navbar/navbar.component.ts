@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BaseLayoutRepository } from '../../state';
 
 @Component({
   selector: 'velaio-navbar',
@@ -8,12 +9,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
-  private _isMenuVisible: boolean = false;
-  public get isMenuVisible(): boolean {
-    return this._isMenuVisible;
-  }
+  protected baseLayoutRepository = inject(BaseLayoutRepository);
+  protected isMenuOpened$ = this.baseLayoutRepository.isMenuVisible$;
+  protected menuItems$ = this.baseLayoutRepository.menuItems$;
 
   protected toogleMenu(): void {
-    this._isMenuVisible = !this._isMenuVisible;
+    this.baseLayoutRepository.toogleIsMenuVisible();
   }
 }

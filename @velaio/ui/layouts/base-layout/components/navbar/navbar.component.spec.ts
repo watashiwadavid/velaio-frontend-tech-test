@@ -29,10 +29,6 @@ describe('NavbarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have isMenuVisible in false by default', () => {
-    expect(component.isMenuVisible).toBeFalse();
-  });
-
   it('should change navbar icon on small size', () => {
     setViewport(1024);
     const element = fixture.debugElement.query(By.css('[test-user-button]'));

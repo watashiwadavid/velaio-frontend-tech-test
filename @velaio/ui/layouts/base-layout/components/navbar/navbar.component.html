@@ -8,10 +8,11 @@
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-4">
             <a
+              *ngFor="let menu of menuItems$ | async"
               href="#"
               class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
               aria-current="page"
-              >Dashboard</a
+              >{{ menu.name }}</a
             >
           </div>
         </div>
@@ -54,7 +55,7 @@
           <span class="sr-only">Open main menu</span>
           <!-- Menu open: "hidden", Menu closed: "block" -->
           <svg
-            [class]="!isMenuVisible ? 'block' : 'hidden'"
+            [class]="!(isMenuOpened$ | async) ? 'block' : 'hidden'"
             class="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
@@ -71,7 +72,7 @@
 
           <!-- Menu open: "block", Menu closed: "hidden" -->
           <svg
-            [class]="isMenuVisible ? 'block' : 'hidden'"
+            [class]="(isMenuOpened$ | async) ? 'block' : 'hidden'"
             class="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
@@ -93,15 +94,17 @@
   <!-- Mobile menu, show/hide based on menu state. -->
   <div class="md:hidden" id="mobile-menu">
     <div
-      [class]="isMenuVisible ? 'block' : 'hidden'"
+      [class]="(isMenuOpened$ | async) ? 'block' : 'hidden'"
       class="space-y-1 px-2 pb-3 pt-2 sm:px-3"
     >
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+
       <a
+        *ngFor="let menu of menuItems$ | async"
         href="#"
         class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
         aria-current="page"
-        >Dashboard</a
+        >{{ menu.name }}</a
       >
     </div>
   </div>
