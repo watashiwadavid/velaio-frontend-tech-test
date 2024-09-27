@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BaseLayoutComponent } from './base-layout.component';
+import { By } from '@angular/platform-browser';
 
 describe('BaseLayoutComponent', () => {
   let component: BaseLayoutComponent;
@@ -8,7 +8,7 @@ describe('BaseLayoutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BaseLayoutComponent]
+      imports: [BaseLayoutComponent],
     });
     fixture = TestBed.createComponent(BaseLayoutComponent);
     component = fixture.componentInstance;
