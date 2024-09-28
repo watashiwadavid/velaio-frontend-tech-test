@@ -22,7 +22,8 @@
     "paths": {
       "@velaio/ui": ["./@velaio/ui/src/public-api.ts"],
       "@velaio/ui/layouts": ["./@velaio/ui/layouts/index.ts"],
-      "@velaio/ui/modules": ["./@velaio/ui/modules/index.ts"]
+      "@velaio/ui/modules": ["./@velaio/ui/modules/index.ts"],
+      "@velaio/data": ["./@velaio/data/src/public-api.ts"]
     },
     "lib": ["ES2022", "dom"]
   },
