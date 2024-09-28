@@ -13,7 +13,11 @@ import {
   RxFormBuilder,
   RxReactiveFormsModule,
 } from '@rxweb/reactive-form-validators';
-import { PersonForm, TaskForm } from './form.model';
+import { PersonForm, TaskForm } from './models';
+import { PersonFormComponent } from './person-form/person-form.component';
+import { Dialog, DialogModule } from '@angular/cdk/dialog';
+import { VioInputDirective } from './person-form/vio-input.directive';
+import { RouterModule } from '@angular/router';
 declare var Datepicker: any;
 
 @Component({
@@ -22,45 +26,84 @@ declare var Datepicker: any;
   imports: [
     CommonModule,
     FormsModule,
+    DialogModule,
+    RouterModule,
     ReactiveFormsModule,
     RxReactiveFormsModule,
+    PersonFormComponent,
+    VioInputDirective,
   ],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
 export class TaskFormPage implements OnInit, AfterViewInit {
+  private dialog = inject(Dialog);
   private formBuilder = inject(RxFormBuilder);
-  protected form = this.formBuilder.formGroup(
+
+  protected formTask = this.formBuilder.formGroup(
     new TaskForm()
   ) as IFormGroup<TaskForm>;
 
   @ViewChild('dateEnd') dateInput!: ElementRef;
 
   ngOnInit(): void {
-    const person: PersonForm = new PersonForm();
-    person.fullname = 'David';
-    person.age = 33;
-    person.skills = ['.Net', 'Angular'];
-
-    this.form.controls.people.setValue([person]);
-    this.form.valueChanges.subscribe((value) => console.log(value));
+    this.formTask.valueChanges.subscribe((value) => console.log(value));
   }
 
   ngAfterViewInit() {
-    // Inicializa el datepicker
     const datepickerEl = this.dateInput.nativeElement;
-    debugger;
+
     if (datepickerEl) {
-      const dp = new Datepicker(datepickerEl, {
+      new Datepicker(datepickerEl, {
         autohide: true,
         format: 'dd-mm-yyyy',
         language: 'es',
       });
 
-      // Escuchar el evento de cambio de fecha y actualizar el valor en el FormControl
       datepickerEl.addEventListener('changeDate', (event: any) => {
-        this.form.controls.endDate?.setValue(event.detail.date); // Actualiza el FormControl con la fecha seleccionada
+        this.formTask.controls.endDate?.setValue(event.detail.date);
       });
     }
+  }
+
+  submit() {
+    if (this.formTask.invalid) {
+      Object.values(this.formTask.controls).forEach((c) => {
+        c.markAsTouched();
+        c.updateValueAndValidity();
+      });
+      return;
+    }
+  }
+
+  addPerson(): void {
+    const dialogRef = PersonFormComponent.openDialog(this.dialog);
+
+    dialogRef.closed.subscribe((personNew) => {
+      if (personNew) {
+        const people = [...this.formTask.value.people, personNew];
+        this.formTask.controls.people.setValue(people);
+      }
+    });
+  }
+
+  editPerson(index: number): void {
+    const people = [...this.formTask.value.people];
+    const dialogRef = PersonFormComponent.openDialog(this.dialog, {
+      ...people[index],
+    });
+
+    dialogRef.closed.subscribe((personUpdated) => {
+      if (personUpdated) {
+        people[index] = new PersonForm(personUpdated);
+        this.formTask.controls.people.setValue(people);
+      }
+    });
+  }
+
+  removePerson(index: number): void {
+    const people = [...this.formTask.value.people];
+    people.splice(index, 1);
+    this.formTask.controls.people.setValue(people);
   }
 }
