@@ -18,7 +18,10 @@ import { PersonFormComponent } from './person-form/person-form.component';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { VioInputDirective } from './person-form/vio-input.directive';
 import { RouterModule } from '@angular/router';
+import { TasksService } from '@velaio/data';
 declare var Datepicker: any;
+
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'velaio-task-form',
@@ -39,6 +42,7 @@ declare var Datepicker: any;
 export class TaskFormPage implements OnInit, AfterViewInit {
   private dialog = inject(Dialog);
   private formBuilder = inject(RxFormBuilder);
+  private tasksService = inject(TasksService);
 
   protected formTask = this.formBuilder.formGroup(
     new TaskForm()
@@ -74,6 +78,22 @@ export class TaskFormPage implements OnInit, AfterViewInit {
       });
       return;
     }
+
+    const task = this.formTask.value;
+
+    this.tasksService.add({
+      id: uuidv4(),
+      name: task.name,
+      date: task.endDate!,
+      people: task.people.map((p) => {
+        return {
+          name: p.fullname || '',
+          age: p.age || 0,
+          skills: p.skills,
+        };
+      }),
+      state: 'pending',
+    });
   }
 
   addPerson(): void {
