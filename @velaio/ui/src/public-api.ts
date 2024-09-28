@@ -1,0 +1,1 @@
+export const VELAIO_UI_LIBRARY = 'VELAIO_UI_LIBRARY';
