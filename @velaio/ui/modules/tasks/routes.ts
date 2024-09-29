@@ -9,8 +9,4 @@ export const routes: Routes = [
     path: 'create',
     loadComponent: () => import('./form').then((c) => c.TaskFormPage),
   },
-  {
-    path: 'edit/:id',
-    loadComponent: () => import('./form').then((c) => c.TaskFormPage),
-  },
 ];

@@ -1,27 +1,63 @@
-# Velaio
+# App Prueba Técnica para VELAIO por David López
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+## Requisitos de Sistema
 
-## Development server
+- **Node.js**: 20.13.1
+- **npm**: 10.2.5
+- **Angular**: 16.2.16
+- **Typescript**: 5.1.6
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Descripción del Proyecto
 
-## Code scaffolding
+Esta aplicación está construida utilizando **Angular** .
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Esta solución es un manejador de tareas web, que permite la administración y asignación de tareas a personas
 
-## Build
+### Estructura del Proyecto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+#### ui: Capa de Presentación
 
-## Running unit tests
+Contiene las siguientes carpetas:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **layouts**: Contenedores generales de uso compartido
+- **modules**: Páginas del aplicativo.
+- **directives**: directivas de uso general
+- **src**: Archivos base y de configuración.
 
-## Running end-to-end tests
+#### data: Capa de Datos
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Contiene las siguientes carpetas:
 
-## Further help
+- **src**: Generalidades de comunicacion con el proveedor de servicios.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Cómo Ejecutar
+
+### Descargar el Repositorio
+
+Clona el repositorio en tu máquina local.
+
+### Instalar Dependencias
+
+Ejecuta el siguiente comando para instalar todas las dependencias necesarias:
+
+```bash
+npm install
+```
+
+### Ejecutar Web
+
+Ejecuta el siguiente comando para ejecutar la aplicación en un browser:
+
+```bash
+npx ng serve
+```
+
+abrir navegador en [http://localhost:4200/](http://localhost:4200/)
+
+### Compilar
+
+Ejecuta el siguiente comando para compilar la aplicación:
+
+```bash
+npx nd build  // compilar app angular
+```

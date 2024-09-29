@@ -8,7 +8,7 @@ import {
 } from '@rxweb/reactive-form-validators';
 import { PersonForm } from '../models';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { VioInputDirective } from './vio-input.directive';
+import { VioInputDirective } from '../../../../directives/vio-input.directive';
 
 @Component({
   selector: 'velaio-person-form',

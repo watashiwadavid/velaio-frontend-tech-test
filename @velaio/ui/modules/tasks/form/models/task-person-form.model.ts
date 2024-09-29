@@ -6,6 +6,7 @@ import {
 
 export class PersonForm {
   @notEmpty({ message: 'El campo es obligatorio' })
+  @minLength({ value: 5, message: 'Minimo 5 caracteres' })
   fullname?: string;
 
   @notEmpty({ message: 'El campo es obligatorio' })

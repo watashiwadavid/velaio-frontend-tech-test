@@ -1,12 +1,7 @@
-<p>{{ formTask.value | json }}</p>
-
 <form [formGroup]="formTask" (ngSubmit)="submit()">
   <div class="space-y-12">
     <div class="border-b border-gray-900/10 pb-12">
-      <h2 class="text-base font-semibold leading-7 text-gray-900">Tarea</h2>
-      <p class="mt-1 text-sm leading-6 text-gray-600">
-        Agrega o edita las tareas
-      </p>
+      <h2 class="w-full text-2xl font-bold text-center mb-4">Agregar Tarea</h2>
 
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div class="sm:col-span-3">
@@ -47,7 +42,7 @@
               type="text"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Select date"
-              formControlName="endDate"
+              formControlName="date"
               vio-input
             />
           </div>
@@ -93,11 +88,11 @@
           </td>
 
           <td class="py-4 px-6">
-            <button (click)="editPerson(i)">
+            <button type="button" (click)="editPerson(i)">
               <span class="material-symbols-outlined"> edit </span>
             </button>
 
-            <button (click)="removePerson(i)">
+            <button type="button" (click)="removePerson(i)">
               <span class="material-symbols-outlined"> delete_forever </span>
             </button>
           </td>
@@ -105,13 +100,15 @@
 
         <tr>
           <td colspan="4">
-            <button
-              type="button"
-              (click)="addPerson()"
-              class="w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Agregar
-            </button>
+            <div class="w-full flex p-2 justify-center">
+              <button
+                type="button"
+                (click)="addPerson()"
+                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Asignar Persona
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>

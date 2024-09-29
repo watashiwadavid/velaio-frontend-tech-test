@@ -16,9 +16,12 @@ import {
 import { PersonForm, TaskForm } from './models';
 import { PersonFormComponent } from './person-form/person-form.component';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
-import { VioInputDirective } from './person-form/vio-input.directive';
-import { RouterModule } from '@angular/router';
+import { VioInputDirective } from '../../../directives/vio-input.directive';
+import { Router, RouterModule } from '@angular/router';
+import { TasksService } from '@velaio/data';
 declare var Datepicker: any;
+
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'velaio-task-form',
@@ -39,6 +42,8 @@ declare var Datepicker: any;
 export class TaskFormPage implements OnInit, AfterViewInit {
   private dialog = inject(Dialog);
   private formBuilder = inject(RxFormBuilder);
+  private tasksService = inject(TasksService);
+  private router = inject(Router);
 
   protected formTask = this.formBuilder.formGroup(
     new TaskForm()
@@ -56,12 +61,11 @@ export class TaskFormPage implements OnInit, AfterViewInit {
     if (datepickerEl) {
       new Datepicker(datepickerEl, {
         autohide: true,
-        format: 'dd-mm-yyyy',
-        language: 'es',
       });
 
       datepickerEl.addEventListener('changeDate', (event: any) => {
-        this.formTask.controls.endDate?.setValue(event.detail.date);
+        const date = (event.detail.date as Date).toLocaleDateString('en-US');
+        this.formTask.controls.date?.setValue(date);
       });
     }
   }
@@ -74,6 +78,24 @@ export class TaskFormPage implements OnInit, AfterViewInit {
       });
       return;
     }
+
+    const task = this.formTask.value;
+
+    this.tasksService.add({
+      id: uuidv4(),
+      name: task.name,
+      date: task.date!,
+      people: task.people.map((p) => {
+        return {
+          name: p.fullname || '',
+          age: p.age || 0,
+          skills: p.skills,
+        };
+      }),
+      isComplete: false,
+    });
+
+    this.router.navigateByUrl('/tasks');
   }
 
   addPerson(): void {
