@@ -11,7 +11,7 @@ export class TaskForm {
   name: string = '';
 
   @notEmpty({ message: 'El campo es obligatorio' })
-  endDate?: string;
+  date?: string;
 
   @propArray(PersonForm)
   @minLength({ value: 1, message: 'Debes asignar por lo menos una persona' })

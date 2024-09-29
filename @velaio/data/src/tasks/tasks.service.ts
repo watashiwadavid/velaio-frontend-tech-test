@@ -21,7 +21,7 @@ export class TasksService {
     store.update(
       updateEntities(id, (entity) => ({
         ...entity,
-        state: 'complete',
+        isComplete: true,
       }))
     );
   }
