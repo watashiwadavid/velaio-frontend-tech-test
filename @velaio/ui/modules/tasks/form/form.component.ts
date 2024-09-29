@@ -16,7 +16,7 @@ import {
 import { PersonForm, TaskForm } from './models';
 import { PersonFormComponent } from './person-form/person-form.component';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
-import { VioInputDirective } from './person-form/vio-input.directive';
+import { VioInputDirective } from '../../../directives/vio-input.directive';
 import { Router, RouterModule } from '@angular/router';
 import { TasksService } from '@velaio/data';
 declare var Datepicker: any;
